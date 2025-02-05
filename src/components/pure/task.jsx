@@ -31,6 +31,19 @@ const Task = ({ task, complete, remove, edit }) => {
         }
     }
 
+    const getLevelBadgeClass = () => {
+        switch (task.level) {
+            case LEVELS.NORMAL:
+                return 'bg-green-50 text-green-700';
+            case LEVELS.URGENT:
+                return 'bg-yellow-50 text-yellow-700';
+            case LEVELS.BLOCKING:
+                return 'bg-red-50 text-red-700';
+            default:
+                return '';
+        }
+    }
+
     const taskCompletedIcon = () => {
         if(task.completed) {
             return <FaCheckCircle className="w-5 h-5 text-green-500" />
@@ -61,15 +74,9 @@ const Task = ({ task, complete, remove, edit }) => {
                     {task.description}
                 </div>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap">
-                <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium 
-                               ring-1 ring-inset transition-all duration-200 ${task.level === LEVELS.NORMAL ? 'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20 hover:bg-green-100' 
-                                                                                                  : task.level === LEVELS.URGENT ? 'bg-yellow-50 text-yellow-700 ring-1 ring-inset ring-yellow-600/20 hover:bg-yellow-100' 
-                                                                                                  : task.level === LEVELS.BLOCKING ? 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20 hover:bg-red-100' : ''}`}>
-                    <span className="mr-1.5 hidden sm:inline transform transition-transform duration-200 group-hover:scale-110">
-                        {taskLevelBadge()}
-                    </span>
-                    {task.level.charAt(0).toUpperCase() + task.level.slice(1).toLowerCase()}
+            <td className="px-3 py-4 text-sm">
+                <span className={getLevelBadgeClass()}>
+                    {task.level}
                 </span>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">

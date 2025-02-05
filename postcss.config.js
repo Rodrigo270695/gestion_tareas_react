@@ -1,6 +1,9 @@
 module.exports = {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
+  plugins: [
+    'postcss-flexbugs-fixes',
+    'postcss-preset-env',
+    'postcss-normalize',
+    'tailwindcss',
+    'autoprefixer',
+  ],
 }
